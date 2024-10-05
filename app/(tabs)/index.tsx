@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StatusBar } from 'react-native';
+import { View, Image, StatusBar, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ThemedText } from '@/components/ThemedText';
@@ -8,6 +8,7 @@ import CustomButton from '@/components/CustomButton';
 
 //images - fix later
 const mooDengImage = require('../../assets/images/moo_deng.png');
+import { FloatingActionButton } from '@/components/FloatingActionButton';
 
 export default function Inventory() {
   return (
@@ -28,6 +29,9 @@ export default function Inventory() {
             containerStyles="w-full mt-7"
           />
         </View>
+
+        {/* Floating Action Button */}
+        <FloatingActionButton />
       </ScrollView>
       {/* <StatusBar backgroundColor="#161622" style="light" /> */}
     </SafeAreaView>
