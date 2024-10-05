@@ -1,28 +1,35 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ThemedText } from '@/components/ThemedText';
-import { Link } from 'expo-router';
+import { Redirect, router } from 'expo-router';
+import CustomButton from '@/components/CustomButton';
+
+//images - fix later
+const mooDengImage = require('../../assets/images/moo_deng.png');
 
 export default function Inventory() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View className="flex-1 items-center justify-center">
-          <ThemedText className="text-xl font-semibold">Hello World</ThemedText>
-
-          {/* Sign In Button */}
-          <Link href="/(auth)/sign-in" className="mt-4 px-4 py-2 bg-blue-500 rounded">
-            <ThemedText className="text-white">Sign In</ThemedText>
-          </Link>
-
-          {/* Sign Up Button */}
-          <Link href="/(auth)/sign-up" className="mt-2 px-4 py-2 bg-green-500 rounded">
-            <ThemedText className="text-white">Sign Up</ThemedText>
-          </Link>
+      <ScrollView contentContainerStyle={{ height: '100%' }}>
+        <View className="w-full justify-center items-center h-full px-4">
+          <Image 
+            source={mooDengImage} 
+            className="w-[130px] h-[84px]" 
+            resizeMode="contain"
+            />
+          <ThemedText className="text-3xl font-semibold">Welcome to Moo Deng</ThemedText>
+          
+          {/* Contine with Email button */}
+          <CustomButton
+            title="Continue with Email"
+            handlePress={() => router.push("/sign-in")}
+            containerStyles="w-full mt-7"
+          />
         </View>
       </ScrollView>
+      {/* <StatusBar backgroundColor="#161622" style="light" /> */}
     </SafeAreaView>
   );
 }
