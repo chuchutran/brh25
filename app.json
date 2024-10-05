@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "package": "com.brh.smart-pantry"
     },
     "android": {
       "adaptiveIcon": {

@@ -7,6 +7,8 @@ import { Link } from "expo-router";
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 
+import { createUser } from "../../lib/appwrite";
+
 //images - fix later
 const mooDengImage = require('../../assets/images/moo_deng.png');
 
@@ -19,7 +21,7 @@ export default function SignUp() {
   });
 
   const submit = async () => {
-
+    createUser();
   }
 
   return (
