@@ -22,7 +22,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onPress={handlePress}
       activeOpacity={0.7}
       // color does not work :(
-      className={`blue rounded-xl min-h-[62px] flex flex-row justify-center items-center ${containerStyles} ${
+      className={`bg-blue-500 rounded-xl min-h-[62px] flex flex-row justify-center items-center ${containerStyles} ${
         isLoading ? "opacity-50" : ""
       }`}
       disabled={isLoading}

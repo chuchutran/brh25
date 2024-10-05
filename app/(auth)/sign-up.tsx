@@ -33,7 +33,7 @@ export default function SignUp() {
           <FormField 
             title="First Name"
             value={form.name}
-            placeholder='Enter your email'
+            placeholder='Enter your first name'
             handleChangeText={(e) => setForm({ ...form, name: e})}
             otherStyles="mt-10"
           />
