@@ -23,7 +23,7 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="index" options={{ headerShown: false }} />
+          {/* <Stack.Screen name="index" options={{ headerShown: false }} /> */}
           {/* <Stack.Screen name="search/[query]" options={{ headerShown: false }} /> */}
           <Stack.Screen name="onboarding" options={{ presentation: 'fullScreenModal', headerShown: false }} />
           <Stack.Screen name="+not-found" />
