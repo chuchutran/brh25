@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react_native_tut",
-    "slug": "react_native_tut",
+    "name": "myapp",
+    "slug": "myapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
