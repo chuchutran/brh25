@@ -1,5 +1,5 @@
 import { Text, type TextProps, StyleSheet } from 'react-native';
-
+import * as Font from 'expo-font';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
 export type ThemedTextProps = TextProps & {
@@ -8,6 +8,7 @@ export type ThemedTextProps = TextProps & {
   type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
 };
 
+
 export function ThemedText({
   style,
   lightColor,
@@ -15,18 +16,23 @@ export function ThemedText({
   type = 'default',
   ...rest
 }: ThemedTextProps) {
+  const [fontsLoaded] = Font.useFonts({
+    'AlbertSans': require('@/assets/fonts/AlbertSans-Regular.ttf'),
+  });
+
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   return (
     <Text
       style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
+        { color }, // Apply color if provided
+        { fontFamily: 'AlbertSans' }, // Default font family
+        style, // Apply any inline styles
+        type === 'default' && styles.default, // Conditional styles based on `type`
+        type === 'title' && styles.title,
+        type === 'defaultSemiBold' && styles.defaultSemiBold,
+        type === 'subtitle' && styles.subtitle,
+        type === 'link' && styles.link,
       ]}
       {...rest}
     />

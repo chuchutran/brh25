@@ -3,6 +3,7 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ThemedText } from '@/components/ThemedText';
+import { FloatingActionButton } from '@/components/FloatingActionButton';
 
 export default function ShoppingList() {
   return (
@@ -12,6 +13,8 @@ export default function ShoppingList() {
           <Text className='text-6xl'>Shopping Lists</Text>
           <ThemedText>u can put da shopping lists here</ThemedText>
         </View>
+        {/* Floating Action Button */}
+        <FloatingActionButton />
       </ScrollView>
     </SafeAreaView>
   );
