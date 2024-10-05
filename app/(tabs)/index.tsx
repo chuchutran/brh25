@@ -7,7 +7,7 @@ import { Link } from 'expo-router';
 
 export default function Inventory() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#yourColor' }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View className="flex-1 items-center justify-center">
           <ThemedText className="text-xl font-semibold">Hello World</ThemedText>

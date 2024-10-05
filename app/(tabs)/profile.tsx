@@ -6,10 +6,11 @@ import { ThemedText } from '@/components/ThemedText';
 
 export default function Profile() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#yourColor' }}>
+    <SafeAreaView>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View>
-          <ThemedText>Dis is the profile</ThemedText>
+        <View className='flex items-center justify-center'>
+          <Text className='text-6xl'>Profile Page</Text>
+          <ThemedText >Dis is the profile</ThemedText>
         </View>
       </ScrollView>
     </SafeAreaView>

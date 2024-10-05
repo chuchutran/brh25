@@ -14,7 +14,8 @@ export default function Recipes() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#yourColor' }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View>
+        <View className='flex items-center justify-center'>
+          <Text className='text-6xl'>Recipes Page</Text>
           <ThemedText>deez are da recipes</ThemedText>
         </View>
       </ScrollView>
