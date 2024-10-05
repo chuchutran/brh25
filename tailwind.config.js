@@ -4,10 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#fafafa',
-        secondary: '#d4d4d6',
-        black: '#000000'
-      }
+        primary: '#176437',
+        secondary: '#fbff87',
+      },
+      fontFamily: {
+        albertsans: ['AlbertSans', 'sans-serif'],
+      },
     },
   },
   plugins: [],
