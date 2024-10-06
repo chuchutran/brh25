@@ -49,9 +49,12 @@ function SavedRecipeCard({ title, ingredients, imageUrl }: RecipeCardProps) {
         <ThemedText className='text-xl mt-2'>{title}</ThemedText>
         <ThemedText>{ingredients}</ThemedText>
       </View>
+      </View>
     </Pressable>
   );
+  );
 }
+
 
 // Sample Data for Saved Recipes
 const savedRecipesData = [
@@ -145,26 +148,48 @@ export default function Profile() {
 
   // If no user is logged in, show the sign-in button
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View className="w-full justify-center items-center h-full px-4">
+    // <SafeAreaView style={{ flex: 1 }}>
+    //   <ScrollView contentContainerStyle={{ height: '100%' }}>
+    //     <View className="w-full justify-center items-center h-full px-4">
+    //       <Image
+    //         source={mooDengImage}
+    //         className="w-[130px] h-[84px]"
+    //         resizeMode="contain"
+    //       />
+    //       <ThemedText className="text-3xl font-semibold">
+    //         Welcome to Moo Deng
+    //       </ThemedText>
+
+    //       {/* Continue with Email button */}
+    //       <CustomButton
+    //         title="Continue with Email"
+    //         handlePress={() => router.push("/sign-in")}
+    //         containerStyles="w-full mt-7"
+    //       />
+    //     </View>
+    //   </ScrollView>
+    // </SafeAreaView>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <StatusBar backgroundColor="#22c55e" barStyle="light-content" />
+      <View className="bg-primary w-full pt-10 pb-10 items-center">
+        {/* Circular Profile Image + Name */}
+        <View className="w-full items-center mt-20">
           <Image
             source={mooDengImage}
-            className="w-[130px] h-[84px]"
-            resizeMode="contain"
+            className="w-32 h-32 rounded-full border-4 border-white"
+            resizeMode="cover"
           />
-          <ThemedText className="text-3xl font-semibold">
-            Welcome to Moo Deng
-          </ThemedText>
-
-          {/* Continue with Email button */}
-          <CustomButton
-            title="Continue with Email"
-            handlePress={() => router.push("/sign-in")}
-            containerStyles="w-full mt-7"
-          />
+          <ThemedText type='title' className='font-bold text-white text-3xl pt-2'>Please Sign-In</ThemedText>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+      <View>
+        <CustomButton
+          title="Continue with Email"
+          handlePress={() => router.push("/sign-in")}
+          containerStyles="mt-5 ml-5 mr-5"
+        />
+      </View>
+
+    </ScrollView>
   );
 }

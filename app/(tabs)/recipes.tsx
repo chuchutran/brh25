@@ -28,25 +28,19 @@ function RecipeCard({ title, ingredients, imageUrl }: RecipeCardProps) {
 
   return (
     <Pressable onPress={handlePress}>
-      <View className='flex-col'>
-        {/* Use aspectRatio and width to make sure the card is always square */}
-        <View
-          style={{
-            width: '100%', // Ensure it takes full width inside the parent
-          }}
-          className='rounded-xl overflow-hidden'
-        >
+      <View className="flex-col">
+        <View style={{ width: '100%' }} className="rounded-xl overflow-hidden">
           <Image
             source={{ uri: imageUrl }}
             style={{
-              aspectRatio: 1, // Maintain square shape
+              aspectRatio: 1,
               width: '100%',
             }}
             className="rounded-xl"
             resizeMode="cover"
           />
         </View>
-        <ThemedText className='text-xl mt-2'>{title}</ThemedText>
+        <ThemedText className="text-xl mt-2">{title}</ThemedText>
         <ThemedText>{ingredients}</ThemedText>
       </View>
     </Pressable>
@@ -54,10 +48,10 @@ function RecipeCard({ title, ingredients, imageUrl }: RecipeCardProps) {
 }
 
 const recipesData: Recipe[] = [
-  { id: 1, title: 'Vegetable Fried Rice With Eggs', ingredients: '4/4 Ingredients', imageUrl: 'https://chefsavvy.com/wp-content/uploads/vegetable-fried-rice-with-runny-fried-egg.jpg' },
-  { id: 2, title: 'Chicken Caesar Salad', ingredients: '3/3 Ingredients', imageUrl: 'https://img.freepik.com/free-photo/chicken-caesar-salad_1147-401.jpg?t=st=1728207121~exp=1728210721~hmac=798c547add1043cc9dac30ac3e281cdcb0643cc82d60c329dd38e459456d09db&w=1800' },
-  { id: 3, title: 'Spaghetti Bolognese', ingredients: '5/6 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/pasta-spaghetti-bolognese-white-plate-white-background-bolognese-sauce-is-classic-italian_763111-5934.jpg' },
-  { id: 4, title: 'Avocado Toast', ingredients: '2/2 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/avocado-toast-white-plate-white-background_864588-11016.jpg' },
+  { id: 1, title: 'Vegetable Fried Rice With Eggs', ingredients: '4/5 Ingredients', imageUrl: 'https://chefsavvy.com/wp-content/uploads/vegetable-fried-rice-with-runny-fried-egg.jpg' },
+  { id: 2, title: 'Chicken Caesar Salad', ingredients: '3/5 Ingredients', imageUrl: 'https://img.freepik.com/free-photo/chicken-caesar-salad_1147-401.jpg?t=st=1728207121~exp=1728210721~hmac=798c547add1043cc9dac30ac3e281cdcb0643cc82d60c329dd38e459456d09db&w=1800' },
+  { id: 3, title: 'Spaghetti Bolognese', ingredients: '5/11 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/pasta-spaghetti-bolognese-white-plate-white-background-bolognese-sauce-is-classic-italian_763111-5934.jpg' },
+  { id: 4, title: 'Avocado Toast', ingredients: '2/5 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/avocado-toast-white-plate-white-background_864588-11016.jpg' },
 ];
 
 const exploreData: Recipe[] = [
@@ -67,81 +61,91 @@ const exploreData: Recipe[] = [
 
 export default function Recipes() {
   return (
-    <>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className='mt-10'>
-        <View className='flex-1 px-10'>
-          <ThemedText className='text-3xl mt-6' type='bold'>Recipes</ThemedText>
-          <ThemedText className='text-xl py-2' type='bold'>Cook Now</ThemedText>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="mt-10">
+      <View className="flex-1 px-10">
+        <ThemedText className="text-3xl mt-6" type="bold">
+          Recipes
+        </ThemedText>
+        <ThemedText className="text-xl py-2" type="bold">
+          Cook Now
+        </ThemedText>
 
-          {/* Recipe cards mapped from JSON data */}
-          <View>
-            {recipesData.reduce((acc, recipe, index) => {
-              if (index % 2 === 0) {
-                acc.push(
-                  <View
-                    key={recipe.id}
-                    className="flex-row space-x-5"
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      marginBottom: 20,
-                    }}
-                  >
-                    {/* Ensure consistent width for both columns */}
-                    <View style={{ width: '48%' }}>
-                      <RecipeCard title={recipe.title} ingredients={recipe.ingredients} imageUrl={recipe.imageUrl} />
-                    </View>
-                    {recipesData[index + 1] && (
-                      <View style={{ width: '48%' }}>
-                        <RecipeCard
-                          title={recipesData[index + 1].title}
-                          ingredients={recipesData[index + 1].ingredients}
-                          imageUrl={recipesData[index + 1].imageUrl}
-                        />
-                      </View>
-                    )}
+        {/* Recipe cards mapped from JSON data */}
+        <View>
+          {recipesData.reduce((acc, recipe, index) => {
+            if (index % 2 === 0) {
+              acc.push(
+                <View
+                  key={recipe.id}
+                  className="flex-row space-x-5"
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: 20,
+                  }}
+                >
+                  <View style={{ width: '48%' }}>
+                    <RecipeCard
+                      title={recipe.title}
+                      ingredients={recipe.ingredients}
+                      imageUrl={recipe.imageUrl} // Pass imageUrl here
+                    />
                   </View>
-                );
-              }
-              return acc;
-            }, [] as JSX.Element[])}
-          </View>
-
-          <ThemedText className='text-xl py-2' type='bold'>Explore</ThemedText>
-          <View>
-            {exploreData.reduce((acc, recipe, index) => {
-              if (index % 2 === 0) {
-                acc.push(
-                  <View
-                    key={recipe.id}
-                    className="flex-row space-x-5"
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      marginBottom: 20,
-                    }}
-                  >
-                    {/* Ensure consistent width for both columns */}
+                  {recipesData[index + 1] && (
                     <View style={{ width: '48%' }}>
-                      <RecipeCard title={recipe.title} ingredients={recipe.ingredients} imageUrl={recipe.imageUrl} />
+                      <RecipeCard
+                        title={recipesData[index + 1].title}
+                        ingredients={recipesData[index + 1].ingredients}
+                        imageUrl={recipesData[index + 1].imageUrl} // Pass imageUrl here
+                      />
                     </View>
-                    {exploreData[index + 1] && (
-                      <View style={{ width: '48%' }}>
-                        <RecipeCard
-                          title={exploreData[index + 1].title}
-                          ingredients={exploreData[index + 1].ingredients}
-                          imageUrl={exploreData[index + 1].imageUrl}
-                        />
-                      </View>
-                    )}
-                  </View>
-                );
-              }
-              return acc;
-            }, [] as JSX.Element[])}
-          </View>
+                  )}
+                </View>
+              );
+            }
+            return acc;
+          }, [] as JSX.Element[])}
         </View>
-      </ScrollView>
-    </>
+
+        <ThemedText className="text-xl py-2" type="bold">
+          Explore
+        </ThemedText>
+        <View>
+          {exploreData.reduce((acc, recipe, index) => {
+            if (index % 2 === 0) {
+              acc.push(
+                <View
+                  key={recipe.id}
+                  className="flex-row space-x-5"
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginBottom: 20,
+                  }}
+                >
+                  <View style={{ width: '48%' }}>
+                    <RecipeCard
+                      title={recipe.title}
+                      ingredients={recipe.ingredients}
+                      imageUrl={recipe.imageUrl} // Pass imageUrl here
+                    />
+                  </View>
+                  {exploreData[index + 1] && (
+                    <View style={{ width: '48%' }}>
+                      <RecipeCard
+                        title={exploreData[index + 1].title}
+                        ingredients={exploreData[index + 1].ingredients}
+                        imageUrl={exploreData[index + 1].imageUrl} // Pass imageUrl here
+                      />
+                    </View>
+                  )}
+                </View>
+              );
+            }
+            return acc;
+          }, [] as JSX.Element[])}
+        </View>
+      </View>
+    </ScrollView>
   );
 }
