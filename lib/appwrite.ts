@@ -2,7 +2,7 @@
 
 // import { Client, Account, Databases, ID } from 'react-native-appwrite';
 
-import { ID, Account, Client, Databases, Query } from 'react-native-appwrite';
+import { ID, Account, Client, Databases, Query, Storage } from 'react-native-appwrite';
 import { Ingredient } from '@/types';
 import { User } from '@/types';
 // Initialize the Appwrite client
@@ -16,12 +16,14 @@ export const config = {
     ingredientsCollectionId: '6702000500172cd9a4e6',
     recripesCollectionId: '6701fe1c00325ca2f513',
     userInventoriesCollectionsId: '670206420008483fe827',
+    storageId: "67023e99000bf4cd60ac",
 }
 
 
 const client = new Client();
 const databases = new Databases(client);
 const account = new Account(client);
+const storage = new Storage(client);
 
 // Init your React Native SDK
 
@@ -30,7 +32,7 @@ client
     .setProject(config.projectId) // Your project ID
 // .setPlatform(config.platform) // Your application ID or bundle ID.
 
-export { client, account, databases, ID };
+export { client, account, databases, storage, ID };
 
 // Register user
 export async function createUser(email: string, password: string, username: string): Promise<User> {
@@ -92,7 +94,6 @@ export async function signOut() {
     }
 }
 
-
 export async function getAccount() {
     try {
         const currentAccount = await account.get();
@@ -122,7 +123,6 @@ export async function getCurrentUser() {
     }
 }
 
-
 export async function getAllUsers(): Promise<User[]> {
     try {
         const response = await databases.listDocuments<User>(
@@ -137,9 +137,7 @@ export async function getAllUsers(): Promise<User[]> {
     }
 }
 
-
 // appwrite.js (continued)
-
 export async function getAllIngredients(): Promise<Ingredient[]> {
     try {
         const response = await databases.listDocuments<Ingredient>(

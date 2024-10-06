@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ThemedText } from '@/components/ThemedText';
-// import { FloatingActionButton } from '@/components/FloatingActionButton';
-import { ScanButton } from '@/components/ScanButton';
+import { FloatingActionButton } from '@/components/FloatingActionButton';
 import { useGlobalContext } from '@/context/GlobalProvider';
 import { getAllIngredients } from '@/lib/appwrite';
 
@@ -11,16 +10,29 @@ import { getAllIngredients } from '@/lib/appwrite';
 interface Ingredient {
   $id: string;
   name: string;
-  expiration: string;
+  expiryDate: string;
   category: string;
-  imageUrl: string; // Corrected field name from "imageURL" to "imageUrl" as per data provided
+  imageUrl: string; 
 }
 
 export default function Inventory() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const { user, isLogged, loading } = useGlobalContext();
 
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        if (isLogged) {
+          const ingredientsData = await getAllIngredients();
+          setIngredients(ingredientsData);
+        }
+      } catch (error) {
+        console.error('Error fetching ingredients:', error);
+      }
+    };
 
+    fetchIngredients();
+  }, [isLogged]);
 
   const renderCategorySection = (category: string, categoryName: string) => {
     const items = ingredients.filter((item) => {
@@ -52,7 +64,7 @@ export default function Inventory() {
                 <Text className="text-lg text-black">{ingredient.name}</Text>
               </View>
               <Text className="text-sm text-gray-500">
-                {ingredient.expiration ? ingredient.expiration : 'N/A'}
+                {ingredient.expiryDate ? ingredient.expiryDate : 'N/A'}
               </Text>
             </TouchableOpacity>
             {index < array.length - 1 && <View className="h-[1px] bg-gray-300 mb-2" />}
@@ -72,11 +84,11 @@ export default function Inventory() {
   }
 
   return (
-    <View className='flex-1'>
+    <SafeAreaView>
       <StatusBar barStyle="dark-content" />
       <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
         <View className="flex-1 px-10">
-          <ThemedText className="text-3xl mt-16 mb-6" type="bold">
+          <ThemedText className="text-3xl mt-6" type="bold">
             Pantry
           </ThemedText>
 
@@ -89,11 +101,12 @@ export default function Inventory() {
               {renderCategorySection('carbs', 'Carbs')}
             </>
           ) : (
-            <Text className="text-xl">Please sign in to view your pantry items.</Text>
+            <Text className="text-xl mt-6">Please sign in to view your pantry items.</Text>
           )}
         </View>
       </ScrollView>
-      <ScanButton />
-    </View>
+      <FloatingActionButton/>
+    </SafeAreaView>
   );
 }
+

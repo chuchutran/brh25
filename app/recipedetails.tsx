@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ThemedText } from '@/components/ThemedText';
@@ -7,7 +7,8 @@ import Entypo from '@expo/vector-icons/Entypo';
 import ToggleButton from '@/components/ToggleButton'; // Import the updated ToggleButton
 
 export default function RecipeDetails() {
-  const { title, ingredients } = useLocalSearchParams(); // Retrieve passed parameters
+  // Retrieve passed parameters
+  const { title, ingredients, imageUrl } = useLocalSearchParams(); 
   const [view, setView] = useState<'ingredients' | 'directions'>('ingredients'); // Manage state
 
   // Sample data for ingredients and directions
@@ -27,14 +28,28 @@ export default function RecipeDetails() {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} className='mt-10'>
       <View style={{ position: 'relative' }}>
-        {/* Gray square view */}
-        <View
-          style={{
-            backgroundColor: 'gray',
-            aspectRatio: 1.5,
-            width: '100%',
-          }}
-        />
+        {/* Recipe Image */}
+        {imageUrl ? (
+          <Image
+            source={{ uri: imageUrl }}
+            style={{
+              width: '100%',
+              aspectRatio: 1.5,
+              borderRadius: 16,
+              marginBottom: 16,
+            }}
+            resizeMode="cover"
+          />
+        ) : (
+          // Fallback: Gray placeholder if imageUrl is not provided
+          <View
+            style={{
+              backgroundColor: 'gray',
+              aspectRatio: 1.5,
+              width: '100%',
+            }}
+          />
+        )}
       </View>
 
       <View className='px-6'>

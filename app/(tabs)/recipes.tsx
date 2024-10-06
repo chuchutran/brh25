@@ -19,10 +19,10 @@ type RecipeCardProps = {
 
 function RecipeCard({ title, ingredients, imageUrl }: RecipeCardProps) {
   const handlePress = () => {
-    // Navigate to RecipeDetails page, passing title and ingredients as parameters
+    // Navigate to RecipeDetails page, passing title, ingredients, and imageUrl as parameters
     router.push({
       pathname: '/recipedetails', // Path to the details page
-      params: { title, ingredients },
+      params: { title, ingredients, imageUrl },
     });
   };
 
