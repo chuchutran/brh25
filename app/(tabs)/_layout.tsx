@@ -5,6 +5,7 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useFirstTimeOpen } from '@/hooks/useFirstTimeOpenHook';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -22,9 +23,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Inventory',
+          title: 'Pantry',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'cube' : 'cube-outline'} color={color} />
+            <MaterialCommunityIcons name={focused ? 'food-apple' : 'food-apple-outline'} size={30} color="black" />
           ),
         }}
       />
@@ -40,7 +41,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="shoppingList"
         options={{
-          title: 'Shopping List',
+          title: 'Cart',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'cart' : 'cart-outline'} color={color} />
           ),

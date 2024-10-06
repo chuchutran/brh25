@@ -28,6 +28,8 @@ export default function RootLayout() {
           {/* <Stack.Screen name="index" options={{ headerShown: false }} /> */}
           {/* <Stack.Screen name="search/[query]" options={{ headerShown: false }} /> */}
           <Stack.Screen name="onboarding" options={{ presentation: 'fullScreenModal', headerShown: false }} />
+          <Stack.Screen name="scan" options={{ headerShown: false }} />
+          <Stack.Screen name="search" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>

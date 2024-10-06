@@ -12,8 +12,8 @@ export default function Inventory() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View className='flex items-center justify-center'>
-          <ThemedText className='text-6xl'>Inventory</ThemedText>
+        <View className='flex-1 px-10'>
+          <ThemedText className='text-3xl' type='bold'>Pantry</ThemedText>
         </View>
 
 

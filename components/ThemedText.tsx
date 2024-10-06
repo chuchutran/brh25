@@ -5,9 +5,8 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'bold';
 };
-
 
 export function ThemedText({
   style,
@@ -16,17 +15,22 @@ export function ThemedText({
   type = 'default',
   ...rest
 }: ThemedTextProps) {
+  // Load both Regular and Bold fonts
   const [fontsLoaded] = Font.useFonts({
-    'AlbertSans': require('@/assets/fonts/AlbertSans-Regular.ttf'),
+    'AlbertSans-Regular': require('@/assets/fonts/AlbertSans-Regular.ttf'),
+    'AlbertSans-Bold': require('@/assets/fonts/AlbertSans-Bold.ttf'), // Load the bold font
   });
 
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+
+  // Use the bold font family if type is bold
+  const fontFamily = type === 'bold' ? 'AlbertSans-Bold' : 'AlbertSans-Regular';
 
   return (
     <Text
       style={[
         { color }, // Apply color if provided
-        { fontFamily: 'AlbertSans' }, // Default font family
+        { fontFamily }, // Apply correct font family based on type
         style // Apply any inline styles
       ]}
       {...rest}

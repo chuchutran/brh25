@@ -13,7 +13,7 @@ export default function ShoppingList() {
           <ThemedText className='text-6xl'>Shopping Lists</ThemedText>
           <ThemedText>u can put da shopping lists here</ThemedText>
         </View>
-        {/* Floating Action Button */}
+
 
       </ScrollView>
       <FloatingActionButton />
