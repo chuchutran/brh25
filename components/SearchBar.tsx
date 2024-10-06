@@ -8,7 +8,11 @@ type Item = {
   description: string;
 };
 
-export default function Search() {
+interface SearchBarProps {
+  onSearch: (query: string) => void; // Define the prop type for onSearch
+}
+
+export default function SearchBar() {
   const [query, setQuery] = useState<string>(''); // Define state types
   const [results, setResults] = useState<Item[]>([]); // Define state type for results
   const [loading, setLoading] = useState<boolean>(false); // State for loading indication
@@ -58,6 +62,7 @@ export default function Search() {
         onChangeText={(text) => setQuery(text)}
         onSubmitEditing={handleSearch} // Trigger search when Return is pressed
         returnKeyType="search" // Display a "Search" button on the keyboard
+
       />
 
       {/* Search Button */}
