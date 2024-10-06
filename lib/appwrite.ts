@@ -2,7 +2,7 @@
 
 // import { Client, Account, Databases, ID } from 'react-native-appwrite';
 
-import { ID, Account, Client, Databases } from 'react-native-appwrite';
+import { ID, Account, Client, Databases, Query } from 'react-native-appwrite';
 import { Ingredient } from '@/types';
 import { User } from '@/types';
 // Initialize the Appwrite client
@@ -75,6 +75,53 @@ export async function signIn(email: string, password: string): Promise<any> {
     }
 }
 
+export async function signOut() {
+    try {
+        const currentAccount = await getAccount();
+        if (!currentAccount) {
+            console.log('No active session to sign out from.');
+            return;
+        }
+
+        // If an active session exists, delete it
+        await account.deleteSession('current');  // This deletes the current session
+        console.log('User signed out successfully');
+    } catch (error: any) {
+        console.error('Error in signOut:', error);
+        throw new Error('Failed to sign out');
+    }
+}
+
+
+
+export async function getAccount() {
+    try {
+        const currentAccount = await account.get();
+        return currentAccount;
+    } catch (error: any) {
+        throw new Error(error.message || 'Get account failed.');
+    }
+}
+
+export async function getCurrentUser() {
+    try {
+        const currentAccount = await getAccount();
+        if (!currentAccount) throw Error;
+
+        const currentUser = await databases.listDocuments(
+            config.databaseId,
+            config.userCollectionId,
+            [Query.equal("accountId", currentAccount.$id)]
+        );
+
+        if (!currentUser) throw Error;
+
+        return currentUser.documents[0];
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
 
 
 export async function getAllUsers(): Promise<User[]> {
