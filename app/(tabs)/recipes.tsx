@@ -1,5 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { View, ScrollView, Pressable } from 'react-native';
+import { View, ScrollView, Pressable, Image } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { router } from 'expo-router';
 import React from 'react';
@@ -8,14 +8,16 @@ type Recipe = {
   id: number;
   title: string;
   ingredients: string;
+  imageUrl: string; // Added imageUrl field
 };
 
 type RecipeCardProps = {
   title: string;
   ingredients: string;
+  imageUrl: string;
 };
 
-function RecipeCard({ title, ingredients }: RecipeCardProps) {
+function RecipeCard({ title, ingredients, imageUrl }: RecipeCardProps) {
   const handlePress = () => {
     // Navigate to RecipeDetails page, passing title and ingredients as parameters
     router.push({
@@ -30,12 +32,20 @@ function RecipeCard({ title, ingredients }: RecipeCardProps) {
         {/* Use aspectRatio and width to make sure the card is always square */}
         <View
           style={{
-            backgroundColor: 'gray',
-            aspectRatio: 1, // Maintain square shape
             width: '100%', // Ensure it takes full width inside the parent
           }}
-          className='rounded-xl'
-        />
+          className='rounded-xl overflow-hidden'
+        >
+          <Image
+            source={{ uri: imageUrl }}
+            style={{
+              aspectRatio: 1, // Maintain square shape
+              width: '100%',
+            }}
+            className="rounded-xl"
+            resizeMode="cover"
+          />
+        </View>
         <ThemedText className='text-xl mt-2'>{title}</ThemedText>
         <ThemedText>{ingredients}</ThemedText>
       </View>
@@ -44,15 +54,15 @@ function RecipeCard({ title, ingredients }: RecipeCardProps) {
 }
 
 const recipesData: Recipe[] = [
-  { id: 1, title: 'Vegetable Fried Rice With Eggs', ingredients: '4/4 Ingredients' },
-  { id: 2, title: 'Chicken Caesar Salad', ingredients: '3/3 Ingredients' },
-  { id: 3, title: 'Spaghetti Bolognese', ingredients: '5/6 Ingredients' },
-  { id: 4, title: 'Avocado Toast', ingredients: '2/2 Ingredients' },
+  { id: 1, title: 'Vegetable Fried Rice With Eggs', ingredients: '4/4 Ingredients', imageUrl: 'https://chefsavvy.com/wp-content/uploads/vegetable-fried-rice-with-runny-fried-egg.jpg' },
+  { id: 2, title: 'Chicken Caesar Salad', ingredients: '3/3 Ingredients', imageUrl: 'https://img.freepik.com/free-photo/chicken-caesar-salad_1147-401.jpg?t=st=1728207121~exp=1728210721~hmac=798c547add1043cc9dac30ac3e281cdcb0643cc82d60c329dd38e459456d09db&w=1800' },
+  { id: 3, title: 'Spaghetti Bolognese', ingredients: '5/6 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/pasta-spaghetti-bolognese-white-plate-white-background-bolognese-sauce-is-classic-italian_763111-5934.jpg' },
+  { id: 4, title: 'Avocado Toast', ingredients: '2/2 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/avocado-toast-white-plate-white-background_864588-11016.jpg' },
 ];
 
 const exploreData: Recipe[] = [
-  { id: 1, title: 'Breakfast Burrito', ingredients: '2/3 Ingredients' },
-  { id: 2, title: 'Cheesy Stuffed Peppers', ingredients: '5/6 Ingredients' },
+  { id: 1, title: 'Breakfast Burrito', ingredients: '2/3 Ingredients', imageUrl: 'https://t3.ftcdn.net/jpg/06/07/17/60/360_F_607176003_m69P50rVqWlYMIfDK72oo11eLgW5uio2.jpg' },
+  { id: 2, title: 'Cheesy Stuffed Peppers', ingredients: '5/6 Ingredients', imageUrl: 'https://img.freepik.com/premium-photo/stuffed-peppers-halves-peppers-stuffed-with-rice-dried-tomatoes-herbs-cheese-baking-dish-blue-wooden-table-top-view-turkish-name-biber-dolmasi_693630-24263.jpg' },
 ];
 
 export default function Recipes() {
@@ -79,13 +89,14 @@ export default function Recipes() {
                   >
                     {/* Ensure consistent width for both columns */}
                     <View style={{ width: '48%' }}>
-                      <RecipeCard title={recipe.title} ingredients={recipe.ingredients} />
+                      <RecipeCard title={recipe.title} ingredients={recipe.ingredients} imageUrl={recipe.imageUrl} />
                     </View>
                     {recipesData[index + 1] && (
                       <View style={{ width: '48%' }}>
                         <RecipeCard
                           title={recipesData[index + 1].title}
                           ingredients={recipesData[index + 1].ingredients}
+                          imageUrl={recipesData[index + 1].imageUrl}
                         />
                       </View>
                     )}
@@ -112,13 +123,14 @@ export default function Recipes() {
                   >
                     {/* Ensure consistent width for both columns */}
                     <View style={{ width: '48%' }}>
-                      <RecipeCard title={recipe.title} ingredients={recipe.ingredients} />
+                      <RecipeCard title={recipe.title} ingredients={recipe.ingredients} imageUrl={recipe.imageUrl} />
                     </View>
                     {exploreData[index + 1] && (
                       <View style={{ width: '48%' }}>
                         <RecipeCard
                           title={exploreData[index + 1].title}
                           ingredients={exploreData[index + 1].ingredients}
+                          imageUrl={exploreData[index + 1].imageUrl}
                         />
                       </View>
                     )}

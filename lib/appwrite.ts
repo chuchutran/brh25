@@ -93,7 +93,6 @@ export async function signOut() {
 }
 
 
-
 export async function getAccount() {
     try {
         const currentAccount = await account.get();
