@@ -49,9 +49,7 @@ function SavedRecipeCard({ title, ingredients, imageUrl }: RecipeCardProps) {
         <ThemedText className='text-xl mt-2'>{title}</ThemedText>
         <ThemedText>{ingredients}</ThemedText>
       </View>
-      </View>
     </Pressable>
-  );
   );
 }
 
