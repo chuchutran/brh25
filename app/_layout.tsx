@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { Text } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
 import { useColorScheme } from '@/hooks/useColorScheme';
+import GlobalProvider from '../context/GlobalProvider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -17,19 +17,19 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          {/* <Stack.Screen name="index" options={{ headerShown: false }} /> */}
-          {/* <Stack.Screen name="search/[query]" options={{ headerShown: false }} /> */}
-          <Stack.Screen name="onboarding" options={{ presentation: 'fullScreenModal', headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </ThemeProvider>
-    </GestureHandlerRootView>
-
+    <GlobalProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            {/* <Stack.Screen name="index" options={{ headerShown: false }} /> */}
+            {/* <Stack.Screen name="search/[query]" options={{ headerShown: false }} /> */}
+            <Stack.Screen name="onboarding" options={{ presentation: 'fullScreenModal', headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </GlobalProvider>
   );
 }

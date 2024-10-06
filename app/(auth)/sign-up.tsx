@@ -2,7 +2,7 @@ import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react'
 import { useState } from "react";
-import { Link } from "expo-router";
+import { Link, router, Href } from "expo-router";
 // import { ThemedText } from '@/components/ThemedText';
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
@@ -13,7 +13,7 @@ import { createUser } from "../../lib/appwrite";
 const mooDengImage = require('../../assets/images/moo_deng.png');
 
 export default function SignUp() {
-  const [isSubmitting, setSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -21,7 +21,21 @@ export default function SignUp() {
   });
 
   const submit = async () => {
-    createUser();
+    if (!form.name || !form.email || !form.password) {
+      Alert.alert('Error', 'Please fill all fields')
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await createUser(form.email, form.password, form.name)
+    
+      router.replace('/home' as Href<'/home'>)
+    } catch (error) {
+      Alert.alert('Error', (error as Error).message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
