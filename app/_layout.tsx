@@ -8,7 +8,7 @@ import 'react-native-reanimated';
 import { Text } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import GlobalProvider from '../context/GlobalProvider';
+import { GlobalProvider } from '@/context/GlobalProvider'; // Import the provider
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();

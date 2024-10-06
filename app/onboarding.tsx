@@ -45,29 +45,18 @@ export default function OnboardingScreen() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
         <View className='m-3 px-5'>
-          <ThemedText type='title' className='text-6xl'>SmartPantry</ThemedText>
-          <ThemedText>Welcome to SmartPantry!</ThemedText>
-          <ThemedText>To provide the best experience, this app requires permissions for the following:</ThemedText>
+          <ThemedText type='title' className='text-5xl mb-5' type="bold">SmartPantry</ThemedText>
+          <ThemedText className='text-xl'>Welcome to SmartPantry!</ThemedText>
+          <ThemedText className='text-xl'>To provide the best experience, this app requires permissions for the following:</ThemedText>
 
-          <ThemedText type="subtitle" className='mt-3'>Camera Permissions </ThemedText>
-          <ThemedText>For taking pictures</ThemedText>
+          <ThemedText type="subtitle" className='mt-3 text-xl' type='bold'>Camera Permissions </ThemedText>
+          <ThemedText className='text-xl'>For taking pictures</ThemedText>
 
-          <ThemedText type="subtitle" className='mt-3'>Media Library Permissions </ThemedText>
-          <ThemedText>To save/view your images</ThemedText>
+          <ThemedText type="subtitle" className='mt-3 text-xl ' type='bold'>Media Library Permissions </ThemedText>
+          <ThemedText className='text-xl'>To save/view your images</ThemedText>
 
-          <Image
-            source={mooDengImage}
-            className="w-[130px] h-[84px]"
-            resizeMode="contain"
-          />
-          <ThemedText className="text-3xl font-semibold">Welcome to Moo Deng</ThemedText>
 
-          {/* Contine with Email button */}
-          <CustomButton
-            title="Continue with Email"
-            handlePress={() => router.push("/sign-in")}
-            containerStyles="w-full mt-7"
-          />
+
 
           <Button title="Continue" onPress={handleContinue} />
         </View>

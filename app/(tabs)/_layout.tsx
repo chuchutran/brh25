@@ -25,7 +25,11 @@ export default function TabLayout() {
         options={{
           title: 'Pantry',
           tabBarIcon: ({ color, focused }) => (
-            <MaterialCommunityIcons name={focused ? 'food-apple' : 'food-apple-outline'} size={30} color="black" />
+            <MaterialCommunityIcons
+              name={focused ? 'food-apple' : 'food-apple-outline'}
+              size={30}
+              color={color} // Ensure the icon color is applied here
+            />
           ),
         }}
       />
