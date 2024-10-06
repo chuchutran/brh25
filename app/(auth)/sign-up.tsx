@@ -8,11 +8,14 @@ import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
 
 import { createUser } from "../../lib/appwrite";
+import { Models } from 'react-native-appwrite';
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 //images - fix later
 const mooDengImage = require('../../assets/images/moo_deng.png');
 
 export default function SignUp() {
+  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -29,7 +32,9 @@ export default function SignUp() {
 
     try {
       const result = await createUser(form.email, form.password, form.name)
-    
+      setUser(result);
+      setIsLogged(true);
+      
       router.replace('/home' as Href<'/home'>)
     } catch (error) {
       Alert.alert('Error', (error as Error).message)

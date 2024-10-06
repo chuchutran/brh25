@@ -4,14 +4,9 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { useFirstTimeOpen } from '@/hooks/useFirstTimeOpenHook';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const { isFirstTime, isLoading } = useFirstTimeOpen();
-
-  if (isLoading) return <></>;
-  if (isFirstTime) return <Redirect href={"/onboarding"} />
 
   return (
     <Tabs
@@ -20,7 +15,7 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
-        name="index"
+        name="inventory"
         options={{
           title: 'Inventory',
           tabBarIcon: ({ color, focused }) => (

@@ -6,13 +6,14 @@ import { Link, router, Href } from "expo-router";
 // import { ThemedText } from '@/components/ThemedText';
 import FormField from '@/components/FormField';
 import CustomButton from '@/components/CustomButton';
-
-import { signIn } from "../../lib/appwrite";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 //images - fix later
 const mooDengImage = require('../../assets/images/moo_deng.png');
 
 export default function SignIn() {
+  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -20,18 +21,29 @@ export default function SignIn() {
   });
 
 const submit = async () => {
-  if (!form.email || !form.password) {
-    Alert.alert('Error', 'Please fill all fields')
+  if (form.email === "" || form.password === "") {
+    Alert.alert("Error", "Please fill in all fields");
+    return;
   }
 
   setIsSubmitting(true);
 
   try {
     await signIn(form.email, form.password)
+    const result = await getCurrentUser();
 
-    // set it to global state...
+    if (result) {
+      // Set the authenticated user in the global context
+      setUser(result);
+      setIsLogged(true);
+
+      // Redirect to main tab only after state is fully updated
+      Alert.alert("Success", "User signed in successfully");
+      router.replace('/(tabs)/' as Href<'/(tabs)/'>);
+    } else {
+      Alert.alert("Error", "Failed to retrieve user data");
+    }
   
-    router.replace('/(tabs)/' as Href<'/(tabs)/'>);
   } catch (error) {
     Alert.alert('Error', (error as Error).message)
   } finally {
