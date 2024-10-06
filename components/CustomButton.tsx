@@ -1,6 +1,7 @@
 import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
 import React from "react";
+import { ThemedText } from "./ThemedText";
 
 interface CustomButtonProps {
   title: string;
@@ -22,14 +23,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onPress={handlePress}
       activeOpacity={0.7}
       // color does not work :(
-      className={`bg-secondary rounded-xl min-h-[62px] flex flex-row justify-center items-center ${containerStyles} ${
-        isLoading ? "opacity-50" : ""
-      }`}
+      className={`bg-[#22c55e] rounded-xl min-h-[62px] flex flex-row justify-center items-center ${containerStyles} ${isLoading ? "opacity-50" : ""
+        }`}
       disabled={isLoading}
     >
-      <Text className={`text-primary font-psemibold text-lg ${textStyles}`}>
+      <ThemedText className={`text-white font-psemibold text-lg ${textStyles}`}>
         {title}
-      </Text>
+      </ThemedText>
 
       {/* {isLoading && (
         <ActivityIndicator
